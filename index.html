@@ -4,21 +4,10 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reunión Semanal · Equipo Comercial Buk</title>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;900&family=Comfortaa:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /* ── PALETA OFICIAL BUK ──────────────────────────
-       #2f4daa  Azul Buk (primario)
-       #2b3b6a  Azul Oscuro
-       #2e6ec9  Azul Intermedio
-       #739fdb  Azul Claro
-       #d9e3fc  Celeste / Fondo tarjetas
-       #edf2ff  Fondo página
-       #f9b82c  Amarillo
-       #f59121  Naranja
-    ─────────────────────────────────────────────── */
     :root {
       --azul:       #2f4daa;
       --azul-dark:  #2b3b6a;
@@ -32,504 +21,150 @@
       --texto:      #1e2d5e;
       --texto-soft: #4a5a82;
       --borde:      #dde5f7;
-
-      /* accent por sección */
       --c-equipo:     #2f4daa;
       --c-resultados: #f9b82c;
       --c-producto:   #2e6ec9;
       --c-eventos:    #f59121;
       --c-otros:      #739fdb;
     }
-
     html, body { height: 100%; }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--texto); display: flex; flex-direction: column; min-height: 100vh; }
 
-    body {
-      font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
-      background: var(--bg);
-      color: var(--texto);
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    /* ══ HEADER ════════════════════════════════════ */
-    header {
-      background: var(--azul);
-      position: relative;
-      overflow: hidden;
-      padding: 0;
-      min-height: 160px;
-    }
-
-    /* Círculo decorativo */
-    header::after {
-      content: '';
-      position: absolute;
-      width: 380px; height: 380px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.04);
-      top: -160px; right: -80px;
-      pointer-events: none;
-    }
-
-    .header-inner {
-      position: relative;
-      z-index: 3;
-      padding: 22px 40px 64px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    /* Logo */
-    .buk-logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .buk-logo-wrap img { height: 36px; width: auto; }
-    .buk-sub {
-      border-left: 1.5px solid rgba(255,255,255,0.28);
-      padding-left: 10px;
-      line-height: 1.2;
-    }
-    .buk-sub span  { font-size: 10px; color: rgba(255,255,255,0.65); display: block; }
-    .buk-sub strong{ font-size: 12px; color: var(--blanco); font-weight: 700; }
-
-    /* Títulos hero */
-    .header-text { flex: 1; min-width: 240px; }
-    .hero-eyebrow {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--amarillo);
-      margin-bottom: 6px;
-    }
-    .header-text h1 {
-      font-size: 1.65rem;
-      font-weight: 900;
-      color: var(--blanco);
-      letter-spacing: -0.5px;
-      line-height: 1.1;
-    }
+    /* HEADER */
+    header { background: var(--azul); position: relative; overflow: hidden; min-height: 160px; }
+    header::after { content: ''; position: absolute; width: 380px; height: 380px; border-radius: 50%; background: rgba(255,255,255,0.04); top: -160px; right: -80px; }
+    .header-inner { position: relative; z-index: 3; padding: 22px 40px 56px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .header-text { flex: 1; min-width: 240px; position: relative; z-index: 5; }
+    .buk-logo-big { display: block; height: 40px; width: auto; filter: brightness(0) invert(1); margin-bottom: 12px; }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #f9b82c; margin-bottom: 6px; }
+    .header-text h1 { font-size: 1.7rem; font-weight: 900; color: #ffffff; letter-spacing: -0.5px; line-height: 1.1; text-shadow: 0 1px 4px rgba(0,0,0,0.2); }
     .header-text h1 .amarillo { color: var(--amarillo); }
-
-    /* Reloj */
-    .header-clock {
-      text-align: right;
-      flex-shrink: 0;
-    }
-    #fecha-display {
-      font-size: 1rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.85);
-      text-align: right;
-    }
-
-    /* Buk logo blanco grande */
-    .buk-logo-big {
-      display: block;
-      height: 44px;
-      width: auto;
-      filter: brightness(0) invert(1);
-      margin-bottom: 14px;
-    }
-
-    /* link eventos buk */
-    .eventos-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: var(--c-eventos);
-      text-decoration: none;
-      background: rgba(245,145,33,0.08);
-      border: 1px solid rgba(245,145,33,0.25);
-      border-radius: 6px;
-      padding: 5px 11px;
-      margin-top: 2px;
-      transition: background 0.2s;
-      align-self: flex-start;
-    }
-    .eventos-link:hover { background: rgba(245,145,33,0.18); }
-
-    /* Onda inferior */
-    .header-wave {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 56px;
-      overflow: hidden;
-      pointer-events: none;
-    }
+    #fecha-display { font-size: 1rem; font-weight: 700; color: rgba(255,255,255,0.9); text-align: right; flex-shrink: 0; position: relative; z-index: 5; }
+    .header-wave { position: absolute; bottom: 0; left: 0; right: 0; height: 52px; overflow: hidden; pointer-events: none; }
     .header-wave svg { width: 100%; height: 100%; }
 
-    /* Franja amarilla */
-    .stripe {
-      height: 4px;
-      background: linear-gradient(90deg, var(--amarillo), var(--naranja));
-      flex-shrink: 0;
-    }
+    /* STRIPE + PROGRESS */
+    .stripe { height: 4px; background: linear-gradient(90deg, var(--amarillo), var(--naranja)); }
+    .progress-wrap { height: 3px; background: var(--borde); }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--azul), var(--amarillo)); transition: width 0.5s ease; }
 
-    /* Barra de progreso */
-    .progress-wrap {
-      height: 3px;
-      background: var(--borde);
-      position: relative;
-      flex-shrink: 0;
-    }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--azul), var(--amarillo));
-      transition: width 0.5s ease;
-      border-radius: 0 2px 2px 0;
-    }
+    /* MAIN GRID */
+    main { flex: 1; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; gap: 16px; padding: 18px 28px; }
 
-    /* ══ MAIN GRID ════════════════════════════════ */
-    main {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 16px;
-      padding: 18px 28px 18px;
-    }
-
-    /* ══ CARDS ════════════════════════════════════ */
-    .card {
-      background: var(--blanco);
-      border: 1.5px solid var(--borde);
-      border-radius: 14px;
-      padding: 20px 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(47,77,170,0.06);
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-    }
-
-    /* Borde superior coloreado */
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: var(--accent);
-      border-radius: 14px 14px 0 0;
-    }
-
-    /* Borde izquierdo al hover (igual que brochure) */
-    .card::after {
-      content: '';
-      position: absolute;
-      left: 0; top: 4px; bottom: 0;
-      width: 4px;
-      background: var(--accent);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(47,77,170,0.14);
-      border-color: var(--accent);
-    }
+    /* CARDS */
+    .card { background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; position: relative; overflow: hidden; box-shadow: 0 2px 10px rgba(47,77,170,0.06); transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--accent); border-radius: 14px 14px 0 0; }
+    .card::after { content: ''; position: absolute; left: 0; top: 4px; bottom: 0; width: 4px; background: var(--accent); opacity: 0; transition: opacity 0.2s; }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(47,77,170,0.14); border-color: var(--accent); }
     .card:hover::after { opacity: 1; }
+    .card-equipo     { --accent: var(--c-equipo);     grid-column: 1; grid-row: 1; }
+    .card-resultados { --accent: var(--c-resultados); grid-column: 2; grid-row: 1; }
+    .card-producto   { --accent: var(--c-producto);   grid-column: 3; grid-row: 1; }
+    .card-eventos    { --accent: var(--c-eventos);    grid-column: 1 / 3; grid-row: 2; }
+    .card-otros      { --accent: var(--c-otros);      grid-column: 3; grid-row: 2; }
+    .card-header { display: flex; align-items: center; gap: 12px; }
+    .card-icon { width: 44px; height: 44px; border-radius: 11px; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; border: 1.5px solid var(--borde); }
+    .card-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: var(--accent); }
+    .card-subtitle { font-size: 0.72rem; color: var(--texto-soft); margin-top: 1px; }
 
-    .card-equipo    { --accent: var(--c-equipo); }
-    .card-resultados{ --accent: var(--c-resultados); }
-    .card-producto  { --accent: var(--c-producto); }
-    .card-eventos   { --accent: var(--c-eventos); }
-    .card-otros     { --accent: var(--c-otros); }
-
-    /* Header de card */
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .card-icon {
-      width: 44px; height: 44px;
-      border-radius: 11px;
-      background: var(--bg);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
-      flex-shrink: 0;
-      border: 1.5px solid var(--borde);
-    }
-    .card-title {
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-    .card-subtitle {
-      font-size: 0.72rem;
-      color: var(--texto-soft);
-      margin-top: 1px;
-      font-weight: 400;
-    }
-
-    /* Lista de items */
-    .item-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      flex: 1;
-    }
-    .item-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
-      font-size: 0.87rem;
-      line-height: 1.45;
-      color: var(--texto);
-    }
-    .item-list li .check {
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      background: var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .item-list li .check::after {
-      content: '▸';
-      font-size: 8px;
-      color: white;
-      font-weight: 900;
-    }
+    /* LISTAS */
+    .item-list { list-style: none; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .item-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 0.87rem; line-height: 1.45; color: var(--texto); }
+    .item-list li .check { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .item-list li .check::after { content: '\25B8'; font-size: 8px; color: white; font-weight: 900; }
     .item-list li.done { opacity: 0.38; text-decoration: line-through; }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 1px 8px;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      background: var(--celeste);
-      color: var(--azul);
-      margin-left: 6px;
-      white-space: nowrap;
-    }
-    .badge.verde { background: #d1fae5; color: #065f46; }
-    .badge.rojo  { background: #fee2e2; color: #991b1b; }
+    .badge { display: inline-flex; align-items: center; padding: 1px 8px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; background: var(--celeste); color: var(--azul); margin-left: 6px; }
+    .pending { color: var(--texto-soft); font-style: italic; opacity: 0.6; }
 
-    .empty-state {
-      font-size: 0.82rem;
-      color: var(--texto-soft);
-      font-style: italic;
-      text-align: center;
-      padding: 8px 0;
-    }
-
-    /* Mini-sección dentro de una card */
-    .mini-section {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--accent);
-      padding: 6px 0 2px;
-      border-top: 1px dashed var(--borde);
-      margin-top: 4px;
-    }
+    /* MINI SECCIONES */
+    .mini-section { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); padding: 6px 0 2px; border-top: 1px dashed var(--borde); margin-top: 4px; }
     .mini-section:first-child { border-top: none; margin-top: 0; padding-top: 0; }
 
-    /* Placeholder pendiente */
-    .pending {
-      color: var(--texto-soft);
-      font-style: italic;
-      opacity: 0.6;
-    }
-
-    /* KPI inline dentro de card */
-    .kpi-inline {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 2px 0 4px;
-    }
-    .kpi-chip {
-      display: flex;
-      flex-direction: column;
-      background: var(--bg);
-      border: 1px solid var(--borde);
-      border-radius: 8px;
-      padding: 6px 12px;
-      min-width: 80px;
-    }
-    .kpi-chip .kpi-val {
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .kpi-chip .kpi-lbl {
-      font-size: 0.64rem;
-      color: var(--texto-soft);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-top: 2px;
-    }
-    .kpi-chip.ok .kpi-val { color: #16a34a; }
-    .kpi-chip.warn .kpi-val { color: var(--naranja); }
+    /* KPI CHIPS */
+    .kpi-inline { display: flex; gap: 8px; flex-wrap: wrap; margin: 2px 0 4px; }
+    .kpi-chip { display: flex; flex-direction: column; background: var(--bg); border: 1px solid var(--borde); border-radius: 8px; padding: 6px 12px; min-width: 76px; }
+    .kpi-chip .kpi-val { font-size: 1.05rem; font-weight: 900; color: var(--accent); line-height: 1; }
+    .kpi-chip .kpi-lbl { font-size: 0.64rem; color: var(--texto-soft); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
+    .kpi-chip.ok    .kpi-val { color: #16a34a; }
+    .kpi-chip.warn  .kpi-val { color: var(--naranja); }
     .kpi-chip.danger .kpi-val { color: #dc2626; }
 
-    /* ── POSICIONES GRID ── */
-    .card-equipo    { grid-column: 1; grid-row: 1; }
-    .card-resultados{ grid-column: 2; grid-row: 1; }
-    .card-producto  { grid-column: 3; grid-row: 1; }
-    .card-eventos   { grid-column: 1 / 3; grid-row: 2; }
-    .card-otros     { grid-column: 3; grid-row: 2; }
+    /* LINK EVENTOS */
+    .eventos-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.76rem; font-weight: 700; color: var(--c-eventos); text-decoration: none; background: rgba(245,145,33,0.08); border: 1px solid rgba(245,145,33,0.25); border-radius: 6px; padding: 5px 11px; margin-top: 4px; transition: background 0.2s; align-self: flex-start; }
+    .eventos-link:hover { background: rgba(245,145,33,0.18); }
 
-    /* ── QR integrado en Otros ── */
-    .qr-block {
-      margin-top: auto;
-      padding-top: 10px;
-      border-top: 1px dashed var(--borde);
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    #qr-canvas canvas, #qr-canvas img {
-      border-radius: 7px;
-      border: 1.5px solid var(--borde);
-    }
-    .qr-text {
-      font-size: 0.76rem;
-      color: var(--texto-soft);
-      line-height: 1.45;
-    }
+    /* QR */
+    .qr-block { margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--borde); display: flex; align-items: center; gap: 14px; }
+    #qr-canvas canvas, #qr-canvas img { border-radius: 7px; border: 1.5px solid var(--borde); }
+    .qr-text { font-size: 0.76rem; color: var(--texto-soft); line-height: 1.45; }
     .qr-text strong { color: var(--azul); }
 
-    /* ══ FOOTER ════════════════════════════════════ */
-    footer {
-      background: var(--azul-dark);
-      padding: 12px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-    .footer-logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    /* FOOTER */
+    footer { background: var(--azul-dark); padding: 11px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .footer-logo-wrap { display: flex; align-items: center; gap: 8px; }
     .footer-logo-wrap img { height: 22px; filter: brightness(0) invert(1); }
-    .footer-week {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.45);
-    }
+    .footer-week { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
     .footer-week span { color: rgba(255,255,255,0.85); font-weight: 700; }
-    .footer-slogan {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.3);
-      font-style: italic;
-    }
-
-    .btn-nav {
-      background: rgba(249,184,44,0.12);
-      border: 1.5px solid rgba(249,184,44,0.35);
-      color: var(--amarillo);
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 6px 16px;
-      border-radius: 7px;
-      cursor: pointer;
-      transition: background 0.2s;
-      font-family: inherit;
-    }
+    .footer-slogan { font-size: 0.75rem; color: rgba(255,255,255,0.3); font-style: italic; }
+    .btn-nav { background: rgba(249,184,44,0.12); border: 1.5px solid rgba(249,184,44,0.35); color: var(--amarillo); font-size: 0.78rem; font-weight: 700; padding: 6px 16px; border-radius: 7px; cursor: pointer; transition: background 0.2s; font-family: inherit; }
     .btn-nav:hover { background: rgba(249,184,44,0.25); }
 
-    /* ══ FOCUS OVERLAY ════════════════════════════ */
-    .focus-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(27,37,80,0.88);
-      z-index: 100;
-      align-items: center;
-      justify-content: center;
-      padding: 48px;
-      backdrop-filter: blur(4px);
-    }
+    /* FOCUS OVERLAY */
+    .focus-overlay { display: none; position: fixed; inset: 0; background: rgba(27,37,80,0.88); z-index: 100; align-items: center; justify-content: center; padding: 32px; backdrop-filter: blur(4px); }
     .focus-overlay.visible { display: flex; }
-
-    .focus-card {
-      background: var(--blanco);
-      border-radius: 18px;
-      padding: 40px 48px;
-      max-width: 780px;
-      width: 100%;
-      border-top: 6px solid var(--focus-color, var(--azul));
-      box-shadow: 0 32px 80px rgba(27,37,80,0.3);
-      position: relative;
-    }
-    .focus-close {
-      position: absolute;
-      top: 18px; right: 22px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--texto-soft);
-      background: none;
-      border: none;
-      font-family: inherit;
-      line-height: 1;
-    }
+    .focus-card { background: var(--blanco); border-radius: 18px; padding: 40px 52px; max-width: 920px; width: 100%; max-height: 85vh; overflow-y: auto; border-top: 6px solid var(--focus-color, var(--azul)); box-shadow: 0 32px 80px rgba(27,37,80,0.3); position: relative; }
+    .focus-close { position: absolute; top: 18px; right: 22px; font-size: 1.5rem; cursor: pointer; color: var(--texto-soft); background: none; border: none; font-family: inherit; line-height: 1; }
     .focus-close:hover { color: var(--texto); }
+    .focus-card .item-list li { font-size: 1.1rem; gap: 14px; padding: 6px 0; }
+    .focus-card .item-list li .check { width: 20px; height: 20px; }
+    .focus-card .mini-section { font-size: 0.78rem; padding: 10px 0 4px; }
+    .focus-card .kpi-chip .kpi-val { font-size: 1.2rem; }
+    .focus-card .kpi-chip .kpi-lbl { font-size: 0.72rem; }
+    .focus-card .res-table { font-size: 0.95rem; }
+    .focus-card .res-table td, .focus-card .res-table th { padding: 6px 10px; }
+    .focus-card .card-header { margin-bottom: 22px; }
+    .focus-card .card-icon { width: 60px; height: 60px; font-size: 1.9rem; }
 
-    .focus-card .card-title { font-size: 0.9rem; margin-bottom: 6px; }
-    .focus-card .item-list li { font-size: 1.05rem; gap: 12px; padding: 5px 0; }
-    .focus-card .item-list { gap: 2px; }
-    .focus-card .card-header { margin-bottom: 18px; }
-    .focus-card .card-icon { width: 54px; height: 54px; font-size: 1.7rem; }
-
-    /* ══ RESPONSIVE ════════════════════════════════ */
+    /* RESPONSIVE */
     @media (max-width: 1100px) {
       main { grid-template-columns: 1fr 1fr; }
-      .card-producto { grid-column: 1; grid-row: 2; }
-      .card-eventos  { grid-column: 1 / 3; grid-row: 3; }
-      .card-otros    { grid-column: 2; grid-row: 2; }
+      .card-producto  { grid-column: 1; grid-row: 2; }
+      .card-eventos   { grid-column: 1 / 3; grid-row: 3; }
+      .card-otros     { grid-column: 2; grid-row: 2; }
     }
     @media (max-width: 700px) {
       main { grid-template-columns: 1fr; }
       .card-equipo, .card-resultados, .card-producto, .card-eventos, .card-otros { grid-column: 1; grid-row: auto; }
     }
+
+    /* RESULTS TABLE */
+    .res-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 0; }
+    .res-table th { text-align: left; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--texto-soft); padding: 3px 6px; border-bottom: 1px solid var(--borde); }
+    .res-table td { padding: 3px 6px; border-bottom: 1px solid rgba(221,229,247,0.5); color: var(--texto); }
+    .res-table tr:last-child td { border-bottom: none; }
+    .res-table .total-row td { background: var(--bg); font-weight: 700; }
+    .pct { display: inline-block; padding: 1px 7px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; }
+    .pct.ok     { background: #d1fae5; color: #065f46; }
+    .pct.warn   { background: #fef3c7; color: #92400e; }
+    .pct.danger { background: #fee2e2; color: #991b1b; }
   </style>
 </head>
 <body>
 
-<!-- ══ HEADER ════════════════════════════════════ -->
+<!-- HEADER -->
 <header>
   <div class="header-inner">
-
     <div class="header-text">
-      <!-- Logo ·buk· blanco, prominente -->
-      <img class="buk-logo-big" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABE0AAAHyCAYAAAAeOzAmAAAXkklEQVR4nO3d0VLkOBJAUdPB//8y+8AQW0BW4XJZVirznIh93Bk3kmXp2s28fXx8bAAAAAB892/2BQAAAABkJJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAE/gcoP/KfloATPgAAAABJRU5ErkJggg==" alt="·buk·"/>
-      <div class="hero-eyebrow" id="semana-eyebrow">Reunión Semanal · Semana del 1 al 5 de junio 2026</div>
-      <h1>Coordinación Semanal<br/><span class="amarillo">Equipo Comercial</span> <span style="opacity:0.65;font-size:1.2rem;">;)</span></h1>
+      <img class="buk-logo-big" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABE0AAAHyCAYAAAAeOzAmAAAXkklEQVR4nO3d0VLkOBJAUdPB//8y+8AQW0BW4XJZVirznIh93Bk3kmXp2s28fXx8bAAAAAB892/2BQAAAABkJJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAE/gcoP/KfloATPgAAAABJRU5ErkJggg==" alt="buk"/>
+      <div class="hero-eyebrow">Reunión Semanal &middot; Semana del 1 al 5 de junio 2026</div>
+      <h1>Coordinación Semanal<br/><span class="amarillo">Equipo Comercial</span></h1>
     </div>
-
-    <div class="header-clock">
-      <div id="fecha-display">Lunes 1 de junio de 2026</div>
-    </div>
+    <div id="fecha-display">Lunes 1 de junio de 2026</div>
   </div>
-
   <div class="header-wave">
-    <svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,28 C360,56 1080,0 1440,28 L1440,56 L0,56 Z" fill="#edf2ff" opacity="0.18"/>
-      <path d="M0,38 C480,10 960,56 1440,24 L1440,56 L0,56 Z" fill="#edf2ff" opacity="0.10"/>
+    <svg viewBox="0 0 1440 52" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,26 C360,52 1080,0 1440,26 L1440,52 L0,52 Z" fill="#edf2ff" opacity="0.18"/>
+      <path d="M0,36 C480,8 960,52 1440,22 L1440,52 L0,52 Z" fill="#edf2ff" opacity="0.10"/>
     </svg>
   </div>
 </header>
@@ -537,40 +172,280 @@
 <div class="stripe"></div>
 <div class="progress-wrap"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
 
-<!-- ══ MAIN GRID ═════════════════════════════════ -->
 <main>
 
   <!-- 1. EQUIPO -->
   <div class="card card-equipo" id="card-equipo" onclick="openFocus('equipo')">
     <div class="card-header">
-      <div class="card-icon">👥</div>
+      <div class="card-icon">&#x1F465;</div>
       <div>
         <div class="card-title">Equipo</div>
-        <div class="card-subtitle">Cambios · Ingresos · Reconocimientos</div>
+        <div class="card-subtitle">Cambios &middot; Ingresos &middot; Reconocimientos</div>
       </div>
     </div>
     <ul class="item-list" id="list-equipo">
+      <li><div class="mini-section">&#x1F680; Nuevos Liderazgos</div></li>
+      <li><span class="check"></span><strong>Trini Mackenna</strong> &mdash; Sales Manager Finanzas</li>
+      <li><span class="check"></span><strong>Agostina Manzur</strong> &mdash; Sales Lead Finanzas</li>
+      <li><span class="check"></span><strong>Pali Tavolari</strong> &mdash; Sales Lead C&eacute;lula S</li>
+      <li><span class="check"></span><strong>Conti Cox</strong> &mdash; Sales Lead C&eacute;lula L</li>
+      <li><div class="mini-section">&#x1F504; Cambios</div></li>
+      <li><span class="check"></span><strong>Isa Decombe</strong> &mdash; AE C&eacute;lula L</li>
+      <li><span class="check"></span><strong>Ignacia Maino</strong> &mdash; AE C&eacute;lula M</li>
+      <li><div class="mini-section">&#x1F44B; Bienvenidas</div></li>
+      <li><span class="check"></span><strong>Jes&uacute;s Claude</strong> &mdash; Bienvenida postnatal &#x1F389;</li>
+      <li><div class="mini-section">&#x1F3C6; Reconocimientos del Mes</div></li>
+      <li><span class="check"></span>Vendedor/a del mes &middot; C&eacute;lula L: <strong>Francia Lara</strong> 271 UF &mdash; <span class="badge verde">282%</span></li>
+      <li><span class="check"></span>Vendedor/a del mes &middot; C&eacute;lula M: <strong>Rosa P&eacute;rez</strong> 149 UF &mdash; <span class="badge verde">189%</span></li>
+      <li><span class="check"></span>Vendedor/a del mes &middot; C&eacute;lula S: <strong>Tere Barros</strong> 102 UF &mdash; <span class="badge verde">147%</span> &#x1F31F; primer mes como AE Senior!</li>
+      <li><span class="check"></span>Vendedor/a del mes &middot; C&eacute;lula SP: <strong>Manuela Prado</strong></li><li><span class="check"></span>Vendedor/a del mes &middot; Finanzas: <strong>Maida Morales</strong> <span class="badge verde">110%</span></li>
+      <li><span class="check"></span>SDR del mes &middot; C&eacute;lula L: <strong>Cami Carrasco</strong> <span class="badge verde">91.17% OKR</span></li>
+      <li><span class="check"></span>SDR del mes &middot; C&eacute;lula M: <strong>Angelita Covarrubias</strong> <span class="badge verde">86% OKR</span></li>
+      <li><span class="check"></span>SDR del mes &middot; C&eacute;lula S: <strong>Nico Castro</strong> <span class="badge verde">92% OKR</span></li>
+      <li><span class="check"></span>SDR del mes &middot; C&eacute;lula SP: <strong>Mart&iacute;n Garc&iacute;a</strong> <span class="badge verde">99.61% OKR</span></li><li><span class="check"></span>SDR del mes &middot; Finanzas: <strong>Diego Hurtado</strong> <span class="badge verde">106% OKR</span></li><li><span class="check"></span>SDR del mes &middot; Seguros: <strong>Caro Vald&eacute;s &amp; Cayayi Romero</strong> <span class="badge verde">112% OKR</span></li>
+      <li><span class="check"></span>Partners del mes: <strong>Team ERP</strong> <span class="badge verde">16 reuniones</span> &amp; <strong>Team Regiones</strong> <span class="badge verde">125% onboarding</span></li>
+    </ul>
+  </div>
 
-      <li><div class="mini-section">🚀 Nuevos Liderazgos</div></li>
-      <li><span class="check"></span><strong>Trini Mackenna</strong> — Sales Manager Finanzas</li>
-      <li><span class="check"></span><strong>Agostina Manzur</strong> — Sales Lead Finanzas</li>
-      <li><span class="check"></span><strong>Pali Tavolari</strong> — Sales Lead Célula S</li>
-      <li><span class="check"></span><strong>Conti Cox</strong> — Sales Lead Célula L</li>
+  <!-- 2. RESULTADOS -->
+  <div class="card card-resultados" id="card-resultados" onclick="openFocus('resultados')">
+    <div class="card-header">
+      <div class="card-icon">&#x1F4CA;</div>
+      <div>
+        <div class="card-title">Resultados</div>
+        <div class="card-subtitle">Ventas &middot; Reuniones &middot; KPIs Mayo</div>
+      </div>
+    </div>
+    <ul class="item-list" id="list-resultados">
+      <li><div class="mini-section">&#x1F4BC; Sales &mdash; Buk HR &middot; Total: <span style="color:var(--naranja);font-weight:900;">75.3%</span></div></li>
+      <li>
+        <div class="kpi-inline">
+          <div class="kpi-chip warn"><span class="kpi-val">1.764 UF</span><span class="kpi-lbl">Cerradas</span></div>
+          <div class="kpi-chip"><span class="kpi-val">2.341 UF</span><span class="kpi-lbl">OKR</span></div>
+          <div class="kpi-chip warn"><span class="kpi-val">75.3%</span><span class="kpi-lbl">Cumplimiento</span></div>
+        </div>
+      </li>
+      <li>
+        <table class="res-table">
+          <thead><tr><th>C&eacute;lula</th><th>OKR</th></tr></thead>
+          <tbody>
+            <tr><td>C&eacute;lula S</td><td><span class="pct warn">78%</span></td></tr>
+            <tr><td>C&eacute;lula M</td><td><span class="pct ok">119%</span></td></tr>
+            <tr><td>C&eacute;lula L</td><td><span class="pct warn">59%</span></td></tr>
+            <tr><td>C&eacute;lula SP</td><td><span class="pct danger">7%</span></td></tr>
+          </tbody>
+        </table>
+      </li>
+      <li><div class="mini-section">&#x1F4BC; Sales &mdash; Buk Finanzas &middot; Total: <span style="color:var(--naranja);font-weight:900;">58%</span></div></li>
+      <li>
+        <div class="kpi-inline">
+          <div class="kpi-chip"><span class="kpi-val">157 UF</span><span class="kpi-lbl">Cerradas</span></div>
+          <div class="kpi-chip"><span class="kpi-val">241 UF</span><span class="kpi-lbl">OKR</span></div>
+          <div class="kpi-chip warn"><span class="kpi-val">58%</span><span class="kpi-lbl">Cumplimiento</span></div>
+        </div>
+      </li>
+      <li><div class="mini-section">&#x2B50; Highlights</div></li>
+      <li><span class="check"></span><strong>C&eacute;lula S</strong> super&oacute; por primera vez en la historia las <strong>700 UF</strong></li>
+      <li><span class="check"></span><strong>C&eacute;lula M</strong> lleva <strong>3 meses consecutivos</strong> cumpliendo m&aacute;s del <strong>90% del OKR</strong> &mdash; consistencia total</li>
+      <li><div class="mini-section">&#x1F4DE; SDR &mdash; Reuniones vs OKR</div></li>
+      <li>
+        <table class="res-table">
+          <thead><tr><th>Equipo</th><th>OKR</th></tr></thead>
+          <tbody>
+            <tr><td>C&eacute;lula S (HR)</td><td><span class="pct ok">87%</span></td></tr>
+            <tr><td>C&eacute;lula M (HR)</td><td><span class="pct warn">77%</span></td></tr>
+            <tr><td>C&eacute;lula L (HR)</td><td><span class="pct warn">63%</span></td></tr>
+            <tr><td>C&eacute;lula SP (HR)</td><td><span class="pct danger">49%</span></td></tr>
+            <tr class="total-row"><td><strong>Total SDR HR</strong></td><td><span class="pct warn">69%</span></td></tr>
+            <tr><td>Finanzas</td><td><span class="pct ok">116%</span></td></tr>
+            <tr><td>Seguros</td><td><span class="pct ok">102%</span></td></tr>
+            <tr class="total-row"><td><strong>Total SDR Upselling</strong></td><td><span class="pct ok">109%</span></td></tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </div>
 
-      <li><div class="mini-section">🔄 Cambios</div></li>
-      <li><span class="check"></span><strong>Isa Decombe</strong> — AE Célula L</li>
-      <li><span class="check"></span><strong>Ignacia Maino</strong> — AE Célula M</li>
+  <!-- 3. PRODUCTO -->
+  <div class="card card-producto" id="card-producto" onclick="openFocus('producto')">
+    <div class="card-header">
+      <div class="card-icon">&#x1F680;</div>
+      <div>
+        <div class="card-title">Producto</div>
+        <div class="card-subtitle">Lanzamientos &middot; Comit&eacute;s &middot; Novedades</div>
+      </div>
+    </div>
+    <ul class="item-list" id="list-producto">
+      <li><div class="mini-section">&#x1F680; Lanzamiento</div></li>
+      <li><span class="check"></span>Desde el <strong>1 de junio</strong> inicia la comercializaci&oacute;n de <strong>Rendiciones</strong> para Buk HR y Buk Finanzas <span class="badge" style="background:#fef9c3;color:#854d0e;">NUEVO</span></li>
+      <li><div class="mini-section">&#x1F4CE; Recursos</div></li>
+      <li>
+        <div style="display:flex;flex-direction:column;gap:8px;width:100%;">
+          <a href="https://docs.google.com/document/d/1j1OZfeS4nPJICB1ybtwCh_YdGtkjH5MLtwyFqmJhung/edit?tab=t.0"
+             target="_blank" rel="noopener" onclick="event.stopPropagation()"
+             style="display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:700;color:var(--azul-mid);text-decoration:none;background:var(--celeste);border:1px solid var(--borde);border-radius:8px;padding:9px 14px;">
+            &#x1F4C4; Brief Rendiciones &mdash; material y capacitaci&oacute;n &rarr;
+          </a>
+          <a href="https://docs.google.com/presentation/d/1kYWEOST4pJj9HA-uGbnepaglcIJvSw_6Qb3f0VbDT-Q/edit"
+             target="_blank" rel="noopener" onclick="event.stopPropagation()"
+             style="display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:700;color:var(--azul-mid);text-decoration:none;background:var(--celeste);border:1px solid var(--borde);border-radius:8px;padding:9px 14px;">
+            &#x1F4CA; PPT Comercial &mdash; deck de ventas actualizado &rarr;
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
 
-      <li><div class="mini-section">👋 Bienvenidas</div></li>
-      <li><span class="check"></span><strong>Jesús Claude</strong> — Bienvenida postnatal 🎉</li>
+  <!-- 4. EVENTOS -->
+  <div class="card card-eventos" id="card-eventos" onclick="openFocus('eventos')">
+    <div class="card-header">
+      <div class="card-icon">&#x1F4C5;</div>
+      <div>
+        <div class="card-title">Eventos de la Semana</div>
+        <div class="card-subtitle">Marketing &middot; Webinars &middot; Agenda Buk</div>
+      </div>
+    </div>
+    <ul class="item-list" id="list-eventos">
+      <li><span class="check"></span><strong>Jue 4 jun</strong> &mdash; The RBL Group &middot; <em>Gesti&oacute;n de Capacidades Humanas</em> &mdash; Summit global: l&iacute;deres de RH como arquitectos del valor estrat&eacute;gico</li>
+      <li><span class="check"></span><strong>Vie 12 jun &middot; 9:00</strong> &mdash; Brunch Buk en Antofagasta &mdash; Aprendizaje, conexi&oacute;n y exploraci&oacute;n de soluciones Buk para gesti&oacute;n de personas</li>
+      <li><span class="check"></span><strong>Vie 12 jun &middot; 9:00</strong> &mdash; Desayuno Buk: Soluciones en Gesti&oacute;n de Personas &mdash; Espacio de aprendizaje y conexi&oacute;n</li>
+      <li><span class="check"></span><strong>Mar 16 jun &middot; 10:00</strong> &mdash; Webinar: <em>Empleo en regiones: datos y oportunidades para activar el mercado laboral</em></li>
+      <li><span class="check"></span><strong>Jue 18 jun &middot; 9:00</strong> &mdash; Brunch Buk en Chil&aacute;n &mdash; Aprendizaje, conexi&oacute;n y exploraci&oacute;n de soluciones Buk</li>
+    </ul>
+    <a class="eventos-link" href="https://www.buk.cl/recursos/eventos-recursos-humanos" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+      &#x1F517; Ver todos los eventos Buk &rarr;
+    </a>
+  </div>
 
-      <li><div class="mini-section">🏆 Reconocimientos del Mes</div></li>
-      <li><span class="check"></span>Vendedor/a del mes · Célula L: <span class="pending">por confirmar</span></li>
-      <li><span class="check"></span>Vendedor/a del mes · Célula M: <span class="pending">por confirmar</span></li>
-      <li><span class="check"></span>Vendedor/a del mes · Célula S: <span class="pending">por confirmar</span></li>
-      <li><span class="check"></span>Vendedor/a del mes · Célula Finanzas: <span class="pending">por confirmar</span></li>
-      <li><span class="check"></span>SDR del mes · Célula L: <span class="pending">por confirmar</span></li>
-      <li><span class="check"></span>SDR del mes · Célula M: <span class="pending">por confirmar</span></li>
-      <li><span class="check"></span>SDR del mes · Célula S: <span class="pending">por confirmar</span></li>
-      <li><span class="check"></span>SDR del mes · Célula Finanzas/Seguros: <span class="pending">por confirmar</span></li>
-      <li><span class="check"></span>Partnership Specialist del mes: <span class="pending">por confir
+  <!-- 5. OTROS -->
+  <div class="card card-otros" id="card-otros" onclick="openFocus('otros')">
+    <div class="card-header">
+      <div class="card-icon">&#x1F4A1;</div>
+      <div>
+        <div class="card-title">Otros Temas</div>
+        <div class="card-subtitle">Avisos &middot; Ideas &middot; Varios</div>
+      </div>
+    </div>
+    <ul class="item-list" id="list-otros">
+      <li><span class="check"></span>&#x2B50; <strong>Invitada especial: Kuki Larrain</strong> &mdash; nos cuenta los temas conversados en el offsite de Heads Latam</li><li><a href="https://docs.google.com/presentation/d/1xxztsvRRAb44MU2BkOyQaKm5jKCrczE_HVf7VeXrenk/edit" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="display:inline-flex;align-items:center;gap:6px;font-size:0.76rem;font-weight:700;color:var(--azul-mid);text-decoration:none;background:var(--celeste);border:1px solid var(--borde);border-radius:6px;padding:6px 12px;">&#x1F4CA; PPT Offsite Heads &amp; C-Level 2026 &rarr;</a></li>
+      <li><span class="check"></span>&#x1F91D; <strong>Concurso interno de referidos</strong> &mdash; si conoces a alguien ideal para el equipo, &iexcl;ref&iacute;relo y participa!</li><li><span class="check"></span>&#x1F389; <strong>Este viernes: Fiesta Buk!</strong> &mdash; nos vemos ahí &#x1F973;</li><li><span class="check"></span>&#x1F4CA; Encuesta de clima <strong>Building Happiness</strong> &mdash; abierta hasta el <strong>8 de junio</strong> &middot; &iexcl;No olvides completarla!</li>
+    </ul>
+    <div class="qr-block">
+      <div id="qr-canvas"></div>
+      <div class="qr-text">
+        <strong>&iquest;Tienes ideas?</strong><br/>
+        Escanea el QR y deja tus temas para pr&oacute;ximas reuniones
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo-wrap">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABE0AAAHyCAYAAAAeOzAmAAAXkklEQVR4nO3d0VLkOBJAUdPB//8y+8AQW0BW4XJZVirznIh93Bk3kmXp2s28fXx8bAAAAAB892/2BQAAAABkJJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAERBMAAACAgGgCAAAAEBBNAAAAAAKiCQAAAEBANAEAAAAIiCYAAAAAAdEEAAAAICCaAAAAAAREEwAAAICAaAIAAAAQEE0AAAAAAqIJAAAAQEA0AQAAAAiIJgAAAAAB0QQAAAAgIJoAAAAABEQTAAAAgIBoAgAAABAQTQAAAAACogkAAABAQDQBAAAACIgmAAAAAAHRBAAAACAgmgAAAAAE/gcoP/KfloATPgAAAABJRU5ErkJggg==" alt="buk"/>
+    <span style="font-size:0.72rem;color:rgba(255,255,255,0.4);">Equipo Comercial</span>
+  </div>
+  <div class="footer-week">Semana del <span>1 al 5 jun 2026</span></div>
+  <div class="footer-slogan">"Crea un lugar de trabajo m&aacute;s feliz&nbsp;;)"</div>
+  <div style="display:flex;gap:8px;">
+    <button class="btn-nav" onclick="markDone()">&#x2713; Marcar visto</button>
+    <button class="btn-nav" onclick="resetDone()">&#x21BA; Resetear</button>
+  </div>
+</footer>
+
+<!-- FOCUS OVERLAY -->
+<div class="focus-overlay" id="focus-overlay" onclick="closeFocusOutside(event)">
+  <div class="focus-card" id="focus-card">
+    <button class="focus-close" onclick="closeFocus()">&#x2715;</button>
+  </div>
+</div>
+
+<script>
+  const GOOGLE_FORM_URL = "https://forms.gle/T9BNRPobLyd5dtnG9";
+
+  new QRCode(document.getElementById("qr-canvas"), {
+    text: GOOGLE_FORM_URL, width: 88, height: 88,
+    colorDark: '#2f4daa', colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.M
+  });
+
+  const META = {
+    equipo:     { icon:'&#x1F465;', title:'Equipo', subtitle:'Cambios &middot; Ingresos &middot; Reconocimientos', color:'#2f4daa', list:'list-equipo' },
+    resultados: { icon:'&#x1F4CA;', title:'Resultados', subtitle:'Ventas &middot; Reuniones &middot; KPIs Mayo', color:'#f9b82c', list:'list-resultados' },
+    producto:   { icon:'&#x1F680;', title:'Producto', subtitle:'Lanzamientos &middot; Comit&eacute;s &middot; Novedades', color:'#2e6ec9', list:'list-producto' },
+    eventos:    { icon:'&#x1F4C5;', title:'Eventos de la Semana', subtitle:'Marketing &middot; Webinars &middot; Agenda Buk', color:'#f59121', list:'list-eventos' },
+    otros:      { icon:'&#x1F4A1;', title:'Otros Temas', subtitle:'Avisos &middot; Ideas &middot; Varios', color:'#739fdb', list:'list-otros' },
+  };
+
+  function openFocus(id) {
+    const m = META[id];
+    const items = document.getElementById(m.list).innerHTML;
+    const fc = document.getElementById('focus-card');
+    fc.style.borderTopColor = m.color;
+
+    const qrSection = id === 'otros' ? `
+      <div style="margin-top:24px;padding-top:18px;border-top:1px dashed #dde5f7;display:flex;align-items:center;gap:24px;">
+        <div id="qr-focus"></div>
+        <div>
+          <div style="font-size:1rem;font-weight:700;color:#2f4daa;margin-bottom:4px;">&#x00BF;Tienes ideas para la reuni&oacute;n?</div>
+          <div style="font-size:0.85rem;color:#4a5a82;line-height:1.5;">Escanea el QR y deja tus temas<br/>para pr&oacute;ximas semanas</div>
+        </div>
+      </div>` : '';
+
+    const eventosLink = id === 'eventos' ? `
+      <div style="margin-top:16px;">
+        <a href="https://www.buk.cl/recursos/eventos-recursos-humanos" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:700;color:#f59121;text-decoration:none;background:rgba(245,145,33,0.08);border:1px solid rgba(245,145,33,0.25);border-radius:6px;padding:7px 14px;">
+          &#x1F517; Ver todos los eventos Buk &rarr;
+        </a>
+      </div>` : '';
+
+    fc.innerHTML = `
+      <button class="focus-close" onclick="closeFocus()">&#x2715;</button>
+      <div class="card-header" style="margin-bottom:20px;">
+        <div class="card-icon" style="width:54px;height:54px;font-size:1.7rem;">${m.icon}</div>
+        <div>
+          <div class="card-title" style="font-size:0.9rem;color:${m.color};">${m.title}</div>
+          <div class="card-subtitle">${m.subtitle}</div>
+        </div>
+      </div>
+      <ul class="item-list" style="gap:4px;">${items}</ul>
+      ${eventosLink}
+      ${qrSection}
+    `;
+
+    if (id === 'otros') {
+      setTimeout(() => {
+        new QRCode(document.getElementById('qr-focus'), {
+          text: GOOGLE_FORM_URL, width: 160, height: 160,
+          colorDark: '#2f4daa', colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.M
+        });
+      }, 50);
+    }
+    document.getElementById('focus-overlay').classList.add('visible');
+  }
+
+  function closeFocus() { document.getElementById('focus-overlay').classList.remove('visible'); }
+  function closeFocusOutside(e) { if (e.target === document.getElementById('focus-overlay')) closeFocus(); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFocus(); });
+
+  const ORDER = ['equipo','resultados','producto','eventos','otros'];
+  let done = [];
+  function markDone() {
+    const next = ORDER.find(id => !done.includes(id));
+    if (!next) return;
+    done.push(next);
+    document.getElementById('card-' + next).style.opacity = '0.42';
+    document.getElementById('progress-fill').style.width = (done.length / ORDER.length * 100) + '%';
+  }
+  function resetDone() {
+    done = [];
+    ORDER.forEach(id => document.getElementById('card-' + id).style.opacity = '1');
+    document.getElementById('progress-fill').style.width = '0%';
+  }
+</script>
+</body>
+</html>
